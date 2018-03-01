@@ -54,9 +54,7 @@ def calcScore(text):
     a = dictCheck(text)
     b = diGram(text)
     c = triGram(text)
-    d = chiSqr(text) / 25
-
-
+    #d = chiSqr(text) / 25
     return (a + b + c)
 
 if len(sys.argv) > 1:
