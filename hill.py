@@ -1,10 +1,12 @@
 import sys
 import english
 
-file = 'email3'
+file = './Emails/email3'
 if len(sys.argv) > 1:
     file = sys.argv[1]
 
+with open(file, 'r') as f:
+    cy = f.readline()
 
 def adjugate(matrix):
     return [[matrix[1][1],(-1 * matrix[0][1]) % 26], [(-1 * matrix[1][0]) % 26,matrix[0][0]]]
@@ -52,3 +54,25 @@ def hillDecrypt(text, key):
 
 #print(hillDecrypt('apadjtftwlfj', [[25,22],[1,23]])) #shortexample
 #print(inverse([[7,8],[11,11]])) # [[25, 22], [1, 23]]
+
+def bruteForce(text):
+    big = 0
+    save = ''
+    for n in range(26):
+        for m in range(26):
+            for l in range(26):
+                for k in range(26):
+                    key = inverse([[n,m],[l,k]])
+                    if key == False:
+                        continue;
+                    else:
+                        plain = hillDecrypt(text, key)
+                        score = english.calcScore(plain)
+                        if score > big:
+                            big = score
+                            save = plain
+                            print(plain)
+                            print(key)
+    return save
+
+print(bruteForce(cy))
