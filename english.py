@@ -5,13 +5,13 @@ if len(sys.argv) > 1:
 
 normal_freqs = {'a': 0.080642499002080981, 'c': 0.026892340312538593, 'b': 0.015373768624831691, 'e': 0.12886234260657689, 'd': 0.043286671390026357, 'g': 0.019625534749730816, 'f': 0.024484713711692099, 'i': 0.06905550211598431, 'h': 0.060987267963718068, 'k': 0.0062521823678781188, 'j': 0.0011176940633901926, 'm': 0.025009719347800208, 'l': 0.041016761327711163, 'o': 0.073783151266212627, 'n': 0.069849754102356679, 'q': 0.0010648594165322703, 'p': 0.017031440203182008, 's': 0.063817324270355996, 'r': 0.06156572691936394, 'u': 0.027856851020401599, 't': 0.090246649949305979, 'w': 0.021192261444145363, 'v': 0.010257964235274787, 'y': 0.01806326249861108, 'x': 0.0016941732664605912, 'z': 0.0009695838238376564}
 
-with open('../workspace/dictionary.txt','r') as f: #first20hours/google-10000-english
+with open('./English Score/20kWords','r') as f: #first20hours/google-10000-english
     common_words = [word.strip() for word in f]
 
-with open('digrams','r') as f:
+with open('./English Score/digrams','r') as f:
     common_digrams = [re.sub(r'[^a-zA-Z]','', word).lower() for word in f]
 
-with open ('trigrams','r') as f:
+with open ('./English Score/trigrams','r') as f:
     common_trigrams = [re.sub(r'[a-zA-Z]','', word).lower() for word in f]
 
 def dictCheck(text):
@@ -59,8 +59,5 @@ def calcScore(text):
 
     return (a + b + c)
 
-if len(sys.argv) > 2:
-    with open(file,'r') as f:
-        message = f.readline()
-        print(calcScore(message))
-        print(freqCalc(message))
+if len(sys.argv) > 1:
+    print(calcScore(file))
